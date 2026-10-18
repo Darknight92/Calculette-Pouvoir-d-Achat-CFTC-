@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculette pouvoir d'achat — CFTC BPCE</title>
+  <meta name="description" content="Comparez vos augmentations collectives et individuelles cumulées à l'inflation INSEE depuis votre arrivée dans l'entreprise.">
+  <link rel="icon" href="assets/logo-cftc-bpce.jpg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="entete">
+    <div class="entete__contenu">
+      <img src="assets/logo-cftc-bpce.jpg" alt="Syndicat CFTC BPCE" class="entete__logo" width="96" height="98">
+      <div>
+        <p class="entete__surtitre">Syndicat CFTC BPCE</p>
+        <h1>Calculette pouvoir d'achat</h1>
+        <p class="entete__soustitre">Vos augmentations ont-elles suivi l'inflation&nbsp;?</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <aside class="mode-emploi" aria-label="Mode d'emploi">
+      <ol>
+        <li><span class="etape">1</span><span>Sélectionnez votre <strong>année d'arrivée</strong></span></li>
+        <li><span class="etape">2</span><span>Renseignez les <strong>cellules bleues</strong></span></li>
+        <li><span class="etape">3</span><span>Cliquez sur le bouton <strong>Calculer</strong></span></li>
+        <li><span class="etape">4</span><span>Vous obtiendrez votre <strong>taux d'augmentation cumulée</strong>&nbsp;!</span></li>
+      </ol>
+      <p class="mode-emploi__note">Saisissez les taux en pourcentage (ex.&nbsp;: <code>1,5</code> pour 1,50&nbsp;%). Laissez vide une année sans augmentation.</p>
+    </aside>
+
+    <section class="calculette">
+      <form id="formulaire" novalidate>
+        <div class="choix-annee">
+          <label for="annee">Sélectionnez l'année de votre arrivée dans l'entreprise&nbsp;:</label>
+          <select id="annee" name="annee"></select>
+        </div>
+
+        <p id="alerte-sans-augmentation" class="alerte" role="status"></p>
+
+        <div class="tableau-conteneur">
+          <table class="tableau">
+            <thead>
+              <tr>
+                <th scope="col">Année</th>
+                <th scope="col">Taux d'augmentation collective</th>
+                <th scope="col">Taux d'augmentation individuelle</th>
+                <th scope="col">Taux d'inflation <span class="nowrap">(source INSEE)</span></th>
+              </tr>
+            </thead>
+            <tbody id="lignes"></tbody>
+          </table>
+        </div>
+
+        <p id="erreur" class="erreur" role="alert" hidden></p>
+
+        <div class="boutons">
+          <button type="submit" class="bouton bouton--principal">Calculer</button>
+          <button type="button" id="reinitialiser" class="bouton bouton--secondaire">Réinitialiser</button>
+        </div>
+      </form>
+
+      <section id="resultats" class="resultats" hidden aria-live="polite">
+        <div class="cartes">
+          <div class="carte">
+            <p class="carte__libelle">Augmentation cumulée</p>
+            <p class="carte__valeur" id="res-augmentation">–</p>
+          </div>
+          <div class="carte">
+            <p class="carte__libelle">Taux d'inflation calculé depuis votre arrivée dans l'entreprise</p>
+            <p class="carte__valeur" id="res-inflation">–</p>
+          </div>
+        </div>
+        <p id="message" class="message"></p>
+        <p id="message-euros" class="message-euros" hidden></p>
+
+        <figure class="graphique">
+          <figcaption>Évolution comparée (base 100 l'année précédant votre arrivée)</figcaption>
+          <div class="legende">
+            <span><i class="pastille pastille--salaire"></i>Votre rémunération</span>
+            <span><i class="pastille pastille--prix"></i>Les prix (inflation INSEE)</span>
+          </div>
+          <div id="graphique"></div>
+        </figure>
+
+        <details class="option-salaire">
+          <summary>Traduire l'écart en euros (facultatif)</summary>
+          <label for="salaire">Votre salaire brut annuel actuel (€)&nbsp;:</label>
+          <input id="salaire" type="text" inputmode="decimal" placeholder="ex. 42 000">
+          <p class="petit">Montant nécessaire pour simplement maintenir votre pouvoir d'achat depuis votre arrivée.</p>
+        </details>
+
+        <button type="button" id="imprimer" class="bouton bouton--lien">Imprimer / enregistrer en PDF</button>
+      </section>
+    </section>
+  </main>
+
+  <footer class="pied">
+    <p><strong>Confidentialité&nbsp;:</strong> tous les calculs sont effectués dans votre navigateur. Aucune donnée saisie n'est transmise ni enregistrée.</p>
+    <p>Méthode&nbsp;: augmentation cumulée = produit des (1&nbsp;+&nbsp;taux collectif)&nbsp;×&nbsp;(1&nbsp;+&nbsp;taux individuel) de chaque année depuis votre arrivée, comparée au cumul des taux d'inflation annuels moyens publiés par l'<a href="https://www.insee.fr/fr/statistiques/serie/001763852" target="_blank" rel="noopener">INSEE</a> (indice des prix à la consommation) sur la même période. Résultats indicatifs.</p>
+    <p>© <span id="annee-courante"></span> Syndicat CFTC BPCE</p>
+  </footer>
+
+  <script src="js/donnees-insee.js"></script>
+  <script src="js/calculette.js"></script>
+</body>
+</html>
