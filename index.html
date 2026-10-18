@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Calculette pouvoir d'achat — CFTC BPCE</title>
   <meta name="description" content="Comparez vos augmentations collectives et individuelles cumulées à l'inflation INSEE depuis votre arrivée dans l'entreprise.">
+  <meta name="theme-color" content="#0f3f93">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Calculette pouvoir d'achat — CFTC BPCE">
+  <meta property="og:description" content="Vos augmentations ont-elles suivi l'inflation ? Comparez vos augmentations cumulées à l'inflation INSEE depuis votre arrivée dans l'entreprise.">
+  <meta property="og:image" content="assets/logo-cftc-bpce.jpg">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary">
   <link rel="icon" href="assets/logo-cftc-bpce.jpg">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -42,6 +49,7 @@
 
         <div class="tableau-conteneur">
           <table class="tableau">
+            <caption class="sr-only">Vos taux d'augmentation année par année, comparés à l'inflation INSEE</caption>
             <thead>
               <tr>
                 <th scope="col">Année</th>
@@ -62,15 +70,19 @@
         </div>
       </form>
 
-      <section id="resultats" class="resultats" hidden aria-live="polite">
+      <section id="resultats" class="resultats" hidden aria-live="polite" tabindex="-1">
         <div class="cartes">
           <div class="carte">
             <p class="carte__libelle">Augmentation cumulée</p>
             <p class="carte__valeur" id="res-augmentation">–</p>
           </div>
           <div class="carte">
-            <p class="carte__libelle">Taux d'inflation calculé depuis votre arrivée dans l'entreprise</p>
+            <p class="carte__libelle">Inflation cumulée depuis votre arrivée</p>
             <p class="carte__valeur" id="res-inflation">–</p>
+          </div>
+          <div class="carte carte--ecart" id="carte-ecart">
+            <p class="carte__libelle">Écart de pouvoir d'achat</p>
+            <p class="carte__valeur" id="res-ecart">–</p>
           </div>
         </div>
         <p id="message" class="message"></p>
@@ -88,18 +100,22 @@
         <details class="option-salaire">
           <summary>Traduire l'écart en euros (facultatif)</summary>
           <label for="salaire">Votre salaire brut annuel actuel (€)&nbsp;:</label>
-          <input id="salaire" type="text" inputmode="decimal" placeholder="ex. 42 000">
+          <input id="salaire" type="text" inputmode="decimal" autocomplete="off" placeholder="ex. 42 000">
           <p class="petit">Montant nécessaire pour simplement maintenir votre pouvoir d'achat depuis votre arrivée.</p>
         </details>
 
-        <button type="button" id="imprimer" class="bouton bouton--lien">Imprimer / enregistrer en PDF</button>
+        <div class="actions-resultat">
+          <button type="button" id="imprimer" class="bouton bouton--lien">Imprimer / enregistrer en PDF</button>
+          <button type="button" id="partager" class="bouton bouton--lien">Partager la calculette</button>
+          <span id="partage-ok" class="partage-ok" role="status"></span>
+        </div>
       </section>
     </section>
   </main>
 
   <footer class="pied">
-    <p><strong>Confidentialité&nbsp;:</strong> tous les calculs sont effectués dans votre navigateur. Aucune donnée saisie n'est transmise ni enregistrée.</p>
-    <p>Méthode&nbsp;: augmentation cumulée = produit des (1&nbsp;+&nbsp;taux collectif)&nbsp;×&nbsp;(1&nbsp;+&nbsp;taux individuel) de chaque année depuis votre arrivée, comparée au cumul des taux d'inflation annuels moyens publiés par l'<a href="https://www.insee.fr/fr/statistiques/serie/001763852" target="_blank" rel="noopener">INSEE</a> (indice des prix à la consommation) sur la même période. Résultats indicatifs.</p>
+    <p><strong>Confidentialité&nbsp;:</strong> tous les calculs sont effectués dans votre navigateur. Vos saisies sont mémorisées uniquement sur votre appareil (pour les retrouver à votre prochaine visite) et ne sont jamais transmises. Le bouton <em>Réinitialiser</em> les efface.</p>
+    <p>Méthode&nbsp;: augmentation cumulée = produit des (1&nbsp;+&nbsp;taux collectif)&nbsp;×&nbsp;(1&nbsp;+&nbsp;taux individuel) de chaque année depuis votre arrivée. Inflation cumulée = produit des (1&nbsp;+&nbsp;taux d'inflation annuel moyen) publiés par l'<a href="https://www.insee.fr/fr/statistiques/serie/001764363" target="_blank" rel="noopener">INSEE</a> (indice des prix à la consommation, ensemble des ménages, France) sur la même période. L'écart de pouvoir d'achat rapporte l'une à l'autre&nbsp;: (1&nbsp;+&nbsp;augmentation cumulée)&nbsp;÷&nbsp;(1&nbsp;+&nbsp;inflation cumulée)&nbsp;−&nbsp;1, c'est-à-dire ce que votre rémunération permet d'acheter aujourd'hui par rapport à votre arrivée. Données disponibles de <span id="annee-min"></span> à <span id="annee-max"></span>. Résultats indicatifs.</p>
     <p>© <span id="annee-courante"></span> Syndicat CFTC BPCE</p>
   </footer>
 
