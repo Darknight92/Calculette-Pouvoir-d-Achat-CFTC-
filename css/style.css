@@ -1,0 +1,401 @@
+/* Charte graphique reprise de la calculette Excel CFTC BPCE */
+:root {
+  --bleu-cftc: #0f3f93;
+  --bleu-cftc-fonce: #0a2d6b;
+  --bleu-saisie: #7ab0d9;
+  --bleu-saisie-clair: #e4eff8;
+  --rouge: #d50000;
+  --vert: #1b7f3b;
+  --gris-fond: #f4f6fa;
+  --gris-bord: #d5dbe6;
+  --gris-texte: #5a6475;
+  --texte: #1a2233;
+  --blanc: #ffffff;
+  --rayon: 10px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  color: var(--texte);
+  background: var(--gris-fond);
+  line-height: 1.45;
+}
+
+/* En-tête */
+.entete {
+  background: var(--bleu-cftc);
+  color: var(--blanc);
+}
+.entete__contenu {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 16px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.entete__logo {
+  width: 96px;
+  height: auto;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+.entete h1 {
+  margin: 0;
+  font-size: clamp(1.4rem, 4vw, 2.1rem);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.entete__surtitre {
+  margin: 0 0 2px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--bleu-saisie);
+  font-weight: bold;
+}
+.entete__soustitre { margin: 4px 0 0; opacity: 0.9; }
+
+/* Mise en page */
+.page {
+  max-width: 1100px;
+  margin: 24px auto;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Mode d'emploi (zone bleue de l'Excel) */
+.mode-emploi {
+  background: var(--bleu-saisie);
+  color: var(--bleu-cftc-fonce);
+  border-radius: var(--rayon);
+  padding: 20px 18px;
+  position: sticky;
+  top: 16px;
+}
+.mode-emploi ol { list-style: none; margin: 0; padding: 0; }
+.mode-emploi li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  font-size: 0.92rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 1.3;
+}
+.mode-emploi li strong { color: var(--blanc); }
+.etape {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--bleu-cftc);
+  color: var(--blanc);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+}
+.mode-emploi__note {
+  margin: 8px 0 0;
+  font-size: 0.82rem;
+  border-top: 1px solid rgba(15, 63, 147, 0.25);
+  padding-top: 12px;
+}
+.mode-emploi code {
+  background: var(--blanc);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* Calculette */
+.calculette {
+  background: var(--blanc);
+  border-radius: var(--rayon);
+  box-shadow: 0 2px 10px rgba(15, 63, 147, 0.08);
+  padding: 24px;
+  min-width: 0;
+}
+
+.choix-annee {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+.choix-annee label {
+  font-weight: bold;
+  color: var(--bleu-cftc);
+}
+select, input[type="text"] {
+  font: inherit;
+  font-size: 1rem;
+  border: 2px solid var(--bleu-cftc);
+  border-radius: 6px;
+  padding: 7px 10px;
+  color: var(--texte);
+  background: var(--blanc);
+}
+select {
+  font-weight: bold;
+  color: var(--bleu-cftc);
+  min-width: 110px;
+}
+
+.alerte {
+  color: var(--rouge);
+  font-weight: bold;
+  margin: 16px 0 8px;
+  min-height: 1.4em;
+}
+
+.tableau-conteneur { overflow-x: auto; }
+.tableau {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 6px;
+}
+.tableau th {
+  color: var(--bleu-cftc);
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 6px 8px;
+  vertical-align: bottom;
+}
+.tableau th:first-child { text-align: left; }
+.tableau td {
+  padding: 2px 8px;
+  text-align: center;
+}
+.tableau td.annee {
+  font-weight: bold;
+  color: var(--bleu-cftc);
+  text-align: left;
+}
+.tableau td.inflation {
+  font-weight: bold;
+  color: var(--bleu-cftc);
+}
+.champ {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 170px;
+}
+.champ input {
+  width: 100%;
+  min-width: 0;
+  background: var(--bleu-saisie);
+  border: 2px solid var(--bleu-saisie);
+  text-align: right;
+  padding-right: 28px;
+  font-weight: bold;
+  color: var(--bleu-cftc-fonce);
+}
+.champ input::placeholder { color: rgba(10, 45, 107, 0.45); }
+.champ input:focus {
+  outline: none;
+  border-color: var(--bleu-cftc);
+  background: var(--bleu-saisie-clair);
+}
+.champ input[aria-invalid="true"] { border-color: var(--rouge); }
+.champ::after {
+  content: "%";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--bleu-cftc-fonce);
+  font-weight: bold;
+  pointer-events: none;
+}
+tr.hors-periode td { opacity: 0.35; }
+tr.hors-periode .champ input {
+  background: #eef0f3;
+  border-color: #eef0f3;
+}
+
+.erreur {
+  background: #fdecec;
+  color: var(--rouge);
+  border-left: 4px solid var(--rouge);
+  padding: 10px 14px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.boutons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+.bouton {
+  font: inherit;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 6px;
+  padding: 11px 28px;
+  cursor: pointer;
+  border: 2px solid var(--bleu-cftc);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.bouton--principal { background: var(--bleu-cftc); color: var(--blanc); }
+.bouton--principal:hover { background: var(--bleu-cftc-fonce); }
+.bouton--secondaire { background: var(--blanc); color: var(--bleu-cftc); }
+.bouton--secondaire:hover { background: var(--bleu-saisie-clair); }
+.bouton--lien {
+  border: none;
+  background: none;
+  color: var(--bleu-cftc);
+  text-decoration: underline;
+  text-transform: none;
+  padding: 8px 0;
+  letter-spacing: 0;
+}
+.bouton:focus-visible, select:focus-visible {
+  outline: 3px solid var(--bleu-saisie);
+  outline-offset: 2px;
+}
+
+/* Résultats */
+.resultats {
+  margin-top: 28px;
+  border-top: 2px solid var(--gris-bord);
+  padding-top: 24px;
+}
+.cartes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.carte {
+  background: var(--bleu-cftc);
+  color: var(--blanc);
+  border-radius: var(--rayon);
+  padding: 16px 18px;
+}
+.carte__libelle { margin: 0; font-size: 0.9rem; opacity: 0.9; }
+.carte__valeur {
+  margin: 6px 0 0;
+  font-size: 2rem;
+  font-weight: bold;
+  font-variant-numeric: tabular-nums;
+}
+.message {
+  margin: 20px 0 0;
+  padding: 16px 18px;
+  border-radius: var(--rayon);
+  font-size: 1.15rem;
+  font-weight: bold;
+  text-align: center;
+}
+.message--baisse { background: #fdecec; color: var(--rouge); }
+.message--hausse { background: #e8f5ec; color: var(--vert); }
+.message-euros {
+  margin: 10px 0 0;
+  text-align: center;
+  color: var(--gris-texte);
+}
+
+.graphique { margin: 24px 0 0; }
+.graphique figcaption {
+  font-weight: bold;
+  color: var(--bleu-cftc);
+  margin-bottom: 6px;
+}
+.legende {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  font-size: 0.88rem;
+  color: var(--gris-texte);
+  margin-bottom: 4px;
+}
+.pastille {
+  display: inline-block;
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+.pastille--salaire { background: var(--bleu-cftc); }
+.pastille--prix { background: var(--rouge); }
+#graphique svg { width: 100%; height: auto; display: block; }
+#graphique text {
+  font-family: inherit;
+  font-size: 12px;
+  fill: var(--gris-texte);
+}
+
+.option-salaire {
+  margin-top: 22px;
+  background: var(--gris-fond);
+  border-radius: var(--rayon);
+  padding: 12px 16px;
+}
+.option-salaire summary {
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--bleu-cftc);
+}
+.option-salaire label { display: block; margin: 12px 0 6px; }
+.option-salaire input { width: 100%; max-width: 220px; }
+.petit { font-size: 0.85rem; color: var(--gris-texte); margin: 8px 0 0; }
+
+/* Pied de page */
+.pied {
+  max-width: 1100px;
+  margin: 0 auto 32px;
+  padding: 0 16px;
+  font-size: 0.82rem;
+  color: var(--gris-texte);
+}
+.pied a { color: var(--bleu-cftc); }
+
+.nowrap { white-space: nowrap; }
+
+/* Mobile */
+@media (max-width: 760px) {
+  .page { grid-template-columns: 1fr; }
+  .mode-emploi { position: static; }
+  .mode-emploi ol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 12px;
+  }
+  .mode-emploi li { font-size: 0.8rem; margin-bottom: 12px; }
+  .calculette { padding: 18px 14px; }
+  .cartes { grid-template-columns: 1fr; }
+  .carte__valeur { font-size: 1.7rem; }
+  .entete__logo { width: 64px; }
+  .tableau th { font-size: 0.78rem; padding: 4px; }
+  .tableau th .nowrap { white-space: normal; }
+  .tableau td { padding: 2px 3px; }
+  .tableau th:first-child, .tableau td.annee { padding-left: 0; }
+  .champ input { padding-left: 6px; padding-right: 22px; }
+  .champ::after { right: 7px; }
+}
+
+/* Impression */
+@media print {
+  body { background: var(--blanc); }
+  .mode-emploi, .boutons, #imprimer, .option-salaire:not([open]), .pied p:first-child { display: none; }
+  .page { display: block; margin: 0; }
+  .calculette { box-shadow: none; padding: 0; }
+  .entete, .carte, .champ input, .etape {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
