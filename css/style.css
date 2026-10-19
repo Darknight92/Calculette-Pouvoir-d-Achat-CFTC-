@@ -56,7 +56,8 @@ body {
 .entete__logo {
   width: 96px;
   height: auto;
-  border-radius: 6px;
+  border-radius: 8px;
+  background: var(--blanc);
   flex-shrink: 0;
 }
 .entete h1 {

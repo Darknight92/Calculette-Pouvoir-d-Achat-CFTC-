@@ -1,5 +1,5 @@
 /*
- * Calculette pouvoir d'achat CFTC BPCE
+ * Calculette pouvoir d'achat — Syndicat CFTC Fédération Banques
  * Reprend la logique de la macro « Calculer » du classeur Excel :
  *   augmentation cumulée = Π (1 + collective) × (1 + individuelle) − 1
  *   inflation cumulée    = Π (1 + inflation) − 1
