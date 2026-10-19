@@ -1,4 +1,4 @@
-# Calculette pouvoir d'achat — CFTC BPCE
+# Calculette pouvoir d'achat — Syndicat CFTC Fédération Banques
 
 Site web statique permettant aux adhérents de comparer leurs taux d'augmentation
 **collective** et **individuelle** cumulés au **taux d'inflation cumulé** (source INSEE)
