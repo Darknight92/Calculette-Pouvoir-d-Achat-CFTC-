@@ -9,7 +9,7 @@ même charte graphique (bleu CFTC `#0F3F93`, cellules de saisie bleues `#7AB0D9`
 mêmes fonctionnalités (choix de l'année d'arrivée, saisie année par année,
 boutons *Calculer* et *Réinitialiser*, message de hausse ou de baisse du pouvoir d'achat).
 
-En plus de l'Excel : inflation INSEE depuis 1991, graphique d'évolution, traduction
+En plus de l'Excel : inflation INSEE depuis 2000, graphique d'évolution, traduction
 facultative de l'écart en euros (par an et par mois), mémorisation locale des saisies,
 partage du lien, impression / PDF, affichage adapté au mobile. Tous les calculs se font
 dans le navigateur ; aucune donnée n'est transmise.
@@ -31,7 +31,7 @@ d'achat, et non −5,85 points.
 ## Données
 
 `js/donnees-insee.js` contient les taux d'inflation annuels moyens (IPC, ensemble des
-ménages, France, ensemble) de **1991 à 2025**, issus des séries INSEE
+ménages, France, ensemble) de **2000 à 2025**, issus des séries INSEE
 [001764363](https://www.insee.fr/fr/statistiques/serie/001764363) (indice annuel) et
 001759970 (indice mensuel).
 
