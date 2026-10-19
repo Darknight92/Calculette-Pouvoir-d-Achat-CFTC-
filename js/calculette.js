@@ -101,8 +101,6 @@
   });
 
   el("annee-courante").textContent = new Date().getFullYear();
-  el("annee-min").textContent = PREMIERE_ANNEE;
-  el("annee-max").textContent = DERNIERE_ANNEE;
 
   // Année proposée par défaut : les dix dernières années, sauf choix mémorisé.
   const anneeParDefaut = Math.max(PREMIERE_ANNEE, DERNIERE_ANNEE - 9);
