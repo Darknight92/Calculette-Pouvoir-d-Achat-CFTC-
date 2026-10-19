@@ -9,22 +9,13 @@
  * https://www.insee.fr/fr/statistiques/serie/001764363
  *
  * Les taux 2013-2025 sont le rapport des indices annuels publiés par l'INSEE ;
- * ceux de 1991 à 2012 sont calculés à partir des moyennes des indices mensuels
+ * ceux de 2000 à 2012 sont calculés à partir des moyennes des indices mensuels
  * (les indices annuels de ces années-là ne sont publiés qu'à une décimale).
  *
  * Mise à jour : ajouter une ligne pour la nouvelle année (en %).
  * Le tableau, la liste des années et les calculs s'adaptent automatiquement.
  */
 const INFLATION_INSEE = {
-  1991: 3.2,
-  1992: 2.4,
-  1993: 2.1,
-  1994: 1.7,
-  1995: 1.8,
-  1996: 2.0,
-  1997: 1.2,
-  1998: 0.7,
-  1999: 0.5,
   2000: 1.7,
   2001: 1.6,
   2002: 1.9,
