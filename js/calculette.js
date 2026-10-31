@@ -136,6 +136,18 @@
     return nombre / 100;
   }
 
+  // Convertit un montant saisi (« 42 000 », « 42.000 », « 42 000,50 € ») en nombre ; NaN si invalide.
+  // Le point est un séparateur de milliers quand il est suivi d'exactement trois chiffres (42.000 = 42 000).
+  function lireMontant(valeur) {
+    let texte = valeur.replace(/[\s€]/g, "");
+    if (texte.includes(",")) {
+      texte = texte.replace(/\./g, "").replace(",", ".");
+    } else if (/^\d{1,3}(\.\d{3})+$/.test(texte)) {
+      texte = texte.replace(/\./g, "");
+    }
+    return /^\d*\.?\d+$/.test(texte) ? Number(texte) : NaN;
+  }
+
   function lireSaisies(depuis) {
     const invalides = [];
     const parAnnee = {};
@@ -168,7 +180,8 @@
     const nb = anneesPeriode(depuis).length;
     el("alerte-sans-augmentation").textContent =
       "Sans aucune augmentation depuis " + depuis + " (" + nb + " année" + (nb > 1 ? "s" : "") +
-      "), votre pouvoir d'achat a baissé de " + formatPct.format(inflationCumulee(depuis));
+      "), votre pouvoir d'achat a baissé de " +
+      formatPct.format(Math.abs(1 / (1 + inflationCumulee(depuis)) - 1));
   }
 
   function calculer() {
@@ -228,7 +241,7 @@
 
   function majEuros() {
     const zone = el("message-euros");
-    const salaire = Number(champSalaire.value.replace(/[\s €]/g, "").replace(",", "."));
+    const salaire = lireMontant(champSalaire.value);
     if (!dernierResultat || !salaire || salaire <= 0) {
       zone.hidden = true;
       return;
@@ -237,15 +250,21 @@
     const { depuis, indiceSalaire, indicePrix } = dernierResultat;
     const salaireCible = (salaire / indiceSalaire) * indicePrix;
     const difference = salaire - salaireCible;
+    // Les inflations INSEE s'arrêtent à DERNIERE_ANNEE : le salaire saisi peut être plus récent.
+    const reserve =
+      new Date().getFullYear() > DERNIERE_ANNEE
+        ? " Estimation arrêtée à fin " + DERNIERE_ANNEE + " (dernière inflation INSEE connue) : " +
+          "si votre salaire intègre des augmentations plus récentes, ce montant est approximatif."
+        : "";
     zone.textContent =
-      difference < 0
+      (difference < 0
         ? "Pour retrouver votre pouvoir d'achat de " + depuis + ", il vous manque environ " +
           formatEuro.format(-difference) + " brut par an, soit " +
           formatEuro.format(-difference / 12) + " par mois (salaire cible : " +
           formatEuro.format(salaireCible) + ")."
         : "Votre salaire dépasse d'environ " + formatEuro.format(difference) + " brut par an (" +
           formatEuro.format(difference / 12) + " par mois) le niveau qui aurait simplement suivi " +
-          "l'inflation depuis " + depuis + ".";
+          "l'inflation depuis " + depuis + ".") + reserve;
     zone.hidden = false;
   }
 
