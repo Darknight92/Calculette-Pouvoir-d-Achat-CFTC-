@@ -16,16 +16,6 @@
  * Le tableau, la liste des années et les calculs s'adaptent automatiquement.
  */
 const INFLATION_INSEE = {
-  2000: 1.7,
-  2001: 1.6,
-  2002: 1.9,
-  2003: 2.1,
-  2004: 2.1,
-  2005: 1.7,
-  2006: 1.7,
-  2007: 1.5,
-  2008: 2.8,
-  2009: 0.1,
   2010: 1.5,
   2011: 2.1,
   2012: 2.0,
